@@ -26,10 +26,15 @@
                     <a href="">Salaries</a>
                     <a href="">Companies</a>
                 </div>
-        
-                <div>
-                    <a href="jobs/create">Post a Job</a>
-                </div>
+                @if (!request()->is('jobs/create'))
+                  <div>
+                      <a href="jobs/create">Post a Job</a>
+                  </div>
+                @else
+                  <div>
+                      <a href="/">Go Back</a>
+                  </div>
+                @endif
             @else
                 <div>
                     <a href="/">Home</a>

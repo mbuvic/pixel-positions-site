@@ -23,4 +23,24 @@ class JobController extends Controller
     {
         return view('jobs.create');
     }
+
+    public function store()
+    {
+        $attributes = request()->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'location' => ['required', 'min:3', 'max:255'],
+            'salary' => ['required', 'min:3', 'max:255'],
+            //make schedule to require either full-time or part-time
+            'schedule' => ['required', 'min:3', 'max:255'],
+            'description' => ['required', 'min:3'],
+            'url' => 'required|url',
+        ]);
+
+        $job = Job::create($attributes);
+
+        $job->tags()->attach($attributes['tags']);
+
+        return redirect('/jobs');
+    
+    }
 }

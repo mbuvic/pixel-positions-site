@@ -20,6 +20,8 @@ class JobFactory extends Factory
         return [
             'employer_id' => Employer::factory(),
             'title' => fake()->jobTitle(),
+            'slug' => fake()->slug(),
+            'description' => fake()->paragraph(3),
             'salary' => fake()->randomElement(['30,000 KES', '40,000 KES', '50,000 KES', '60,000 KES', '70,000 KES', '80,000 KES', '90,000 KES', '100,000 KES']),
             'location' => fake()->city(),
             'schedule' => fake()->randomElement(['full-time', 'part-time']),

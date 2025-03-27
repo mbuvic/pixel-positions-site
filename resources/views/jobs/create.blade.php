@@ -1,57 +1,55 @@
 <x-layout>
-  <x-slot:title>Pixel Positions - Create Job</x-slot:title>
-
-  <form method="POST" action="/jobs">
+  <x-slot:title>Pixel Positions - Add Job</x-slot:title>
+  <h2 class="flex flex-col items-center font-bold text-xl mb-3">Create a new Job</h2>
+  <form class="max-w-4xl mx-auto" method="POST" action="/register">
     @csrf
-      <div class="space-y-12">
-        <div class="border-b border-gray-900/10 pb-12">
-          <h2 class="text-base/7 font-semibold text-gray-900">Create A New Job</h2>
-          <p class="mt-1 text-sm/6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
-    
-        <div> 
-          <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-            <x-form-field class="sm:col-span-6">
-              <x-form-label for="title">Title</x-form-label>
-              <x-form-input name="title" id="title" placeholder="Job Title" value="{{ old('title') }}" required/>
-              <x-form-error name="title"/>
-            </x-form-field>
+    <x-form-field-group>
 
-            @php
-                $locations = [
-                    'United States'       => 'United States',
-                    'Canada'              => 'Canada',
-                    'Mexico'              => 'Mexico',
-                    'Kenya'               => 'Kenya',
-                    'Remote - United States' => 'Remote - United States',
-                    'Remote - Canada'        => 'Remote - Canada',
-                    'Remote - Mexico'        => 'Remote - Mexico',
-                    'Remote - Kenya'         => 'Remote - Kenya',
-                ];
-            @endphp
-            
-            <x-form-field>
-                <x-form-label for="location">Location</x-form-label>
-                <x-form-select name="location" id="location" :options="$locations" required/>
-                <x-form-error name="location"/>
-            </x-form-field>
-        
-    
-            <x-form-field>
-              <x-form-label for="salary">Salary</x-form-label>
-              <x-form-input name="salary" id="salary" placeholder="Prefered Salary" value="{{ old('salary') }}" required/>
-              <x-form-error name="salary"/>
-            </x-form-field>
+      <x-form-field>
+        <x-form-input type="text" name="title" id="title" value="{{ old('title') }}" placeholder=" " required />
+        <x-form-label for="title" >Title (Senior Software Developer)</x-form-label>
+        <x-form-error name="title"/>
+      </x-form-field>
 
-          </div>
-        </div>
-      </div>
-    
-      <div class="mt-6 flex items-center justify-end gap-x-6">
-        <a href="/jobs" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
-        <x-form-button type="submit">Save</x-form-button>
-      </div>
-    </form>
-    
+      <x-form-field>
+        <x-form-input type="text" name="location" id="location" value="{{ old('location') }}" placeholder=" " required />
+        <x-form-label for="location" >Location (Nairobi - Kenya)</x-form-label>
+        <x-form-error name="location"/>
+      </x-form-field>
 
+    </x-form-field-group>
+
+    <x-form-field-group>
+
+      <x-form-field>
+        <x-form-input type="text" name="salary" id="salary" value="{{ old('salary') }}" placeholder=" " required />
+        <x-form-label for="salary" >Salary (KES)</x-form-label>
+        <x-form-error name="salary"/>
+      </x-form-field>
+
+      <x-form-field>
+        <x-form-input type="text" name="schedule" id="schedule" value="{{ old('schedule') }}" placeholder=" " required />
+        <x-form-label for="schedule" >Schedule (Full-time/Part-time)</x-form-label>
+        <x-form-error name="schedule"/>
+      </x-form-field>
+
+    </x-form-field-group>
+
+    <x-form-field>
+      <x-form-textarea name="description" id="description" rows="5" placeholder=" " required>{{ old('description') }}</x-form-textarea>
+      <x-form-label for="description" >Description</x-form-label>
+      <x-form-error name="description"/>
+    </x-form-field>
+
+    <x-form-field>
+      <x-form-input type="url" name="url" id="url" value="{{ old('url') }}" placeholder=" " required />
+      <x-form-label for="url" >External Link (https://externaljob.link)</x-form-label>
+      <x-form-error name="url"/>
+    </x-form-field>
+
+    <div class="float-right">
+      <x-form-button type="submit">Save Job</x-form-button>
+    </div>    
+  </form>      
 </x-layout>
