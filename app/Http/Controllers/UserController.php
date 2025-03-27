@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -28,9 +30,34 @@ class UserController extends Controller
       ]);
 
       //store
-      dd($userAttributes);
-      User::create($userAttributes);
-      //create session 
+      $user = User::create($userAttributes);
+      //create session
+      Auth::login($user);
       //redirect
+      return redirect('/');
+    }
+
+    public function setSession()
+    {
+      //validate
+      $userAttributes = request()->validate([
+        'email' => ['required', 'email', 'max:255'],
+        'password' => ['required', 'min:3', 'max:255']
+      ]);
+
+      //create session
+      if (Auth::attempt($userAttributes)) {
+        return redirect('/');
+      } else {
+        throw ValidationException::withMessages([
+          'email' => 'Sorry, Your provided credentials did not match our records'
+      ]);
+      }
+    }
+
+    public function destroySession()
+    {
+      Auth::logout();
+      return redirect('/');
     }
 }

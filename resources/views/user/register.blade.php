@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>Pixel Positions - Register</x-slot:title>
   <h2 class="flex flex-col items-center font-bold text-xl mb-3">Register a new Account</h2>
-  <form class="max-w-md mx-auto" method="POST" action="/register">
+  <form class="max-w-md mx-auto" method="POST" action="/user/register">
     @csrf
 
     <x-form-field-group>

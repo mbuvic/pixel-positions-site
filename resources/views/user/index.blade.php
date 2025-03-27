@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot:title>Pixel Positions - Login</x-slot:title>
   <h2 class="flex flex-col items-center font-bold text-xl mb-3">Login to your Account</h2>
-    <form class="max-w-md mx-auto" method="POST" action="/register">
+    <form class="max-w-md mx-auto" method="POST" action="/user/login">
       @csrf
 
       <x-form-field>
