@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pixel Positions</title>
+    <title>{{ $title }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -18,15 +18,23 @@
                     <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="">
                 </a>
             </div>
-            <div class="space-x-6 font-bold">
-                <a href="">Jobs</a>
-                <a href="">Careers</a>
-                <a href="">Salaries</a>
-                <a href="">Companies</a>
-            </div>
-            <div>
-                <a href="">Post a Job</a>
-            </div>
+
+            @if (!request()->is('user/login') && !request()->is('user/register'))
+                <div class="space-x-6 font-bold">
+                    <a href="">Jobs</a>
+                    <a href="">Careers</a>
+                    <a href="">Salaries</a>
+                    <a href="">Companies</a>
+                </div>
+        
+                <div>
+                    <a href="jobs/create">Post a Job</a>
+                </div>
+            @else
+                <div>
+                    <a href="/">Home</a>
+                </div>
+            @endif
         </nav>
         <main class="mt-10 max-w-[986px] mx-auto">
             {{ $slot }}

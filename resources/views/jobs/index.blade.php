@@ -1,4 +1,5 @@
 <x-layout>
+  <x-slot:title>Pixel Positions - Home</x-slot:title>
     <div class="space-y-10">
         <section class="text-center pt-6">
             <h1 class="font-bold text-4xl">Let's Find Your Next Job</h1>

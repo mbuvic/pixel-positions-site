@@ -23,7 +23,6 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Tag::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Job::class)->constrained()->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

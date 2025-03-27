@@ -18,4 +18,9 @@ class JobController extends Controller
             'tags' => Tag::all(),
         ]);
     }
+
+    public function create()
+    {
+        return view('jobs.create');
+    }
 }
