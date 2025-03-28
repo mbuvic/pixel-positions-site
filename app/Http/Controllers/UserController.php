@@ -11,12 +11,20 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+      if (!Auth::check()) {
+        return view('user.login');
+      } else {
+        return redirect('/');
+      }
     }
 
     public function create()
     {
+      if (!Auth::check()) {
         return view('user.register');
+      } else {
+        return redirect('/');
+      }
     }
 
     public function store()

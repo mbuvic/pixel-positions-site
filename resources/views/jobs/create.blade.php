@@ -1,7 +1,19 @@
+@foreach($tags as $tag)
+  @php
+    $jobTags[] = $tag->name;
+  @endphp
+@endforeach
+
+@php
+    // if (old('tags')) {
+    //     dd(old('tags'));
+    // }
+@endphp
+
 <x-layout>
   <x-slot:title>Pixel Positions - Add Job</x-slot:title>
   <h2 class="flex flex-col items-center font-bold text-xl mb-3">Create a new Job</h2>
-  <form class="max-w-4xl mx-auto" method="POST" action="/register">
+  <form class="max-w-4xl mx-auto" method="POST" action="/jobs/create">
     @csrf
 
     <x-form-field-group>
@@ -30,7 +42,7 @@
 
       <x-form-field>
         <x-form-input type="text" name="schedule" id="schedule" value="{{ old('schedule') }}" placeholder=" " required />
-        <x-form-label for="schedule" >Schedule (Full-time/Part-time)</x-form-label>
+        <x-form-label for="schedule" >Schedule (full-time/part-time)</x-form-label>
         <x-form-error name="schedule"/>
       </x-form-field>
 
@@ -47,6 +59,8 @@
       <x-form-label for="url" >External Link (https://externaljob.link)</x-form-label>
       <x-form-error name="url"/>
     </x-form-field>
+
+    <x-form-tag-select :jobTags="$jobTags" name="tags" :oldTags="old('tags')"/>
 
     <div class="float-right">
       <x-form-button type="submit">Save Job</x-form-button>

@@ -17,4 +17,15 @@ class Job extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class);
     }
+
+    //set fillable
+    protected $fillable = [
+        'title',
+        'location',
+        'salary',
+        'schedule',
+        'description',
+        'url',
+        'featured',
+    ];
 }
