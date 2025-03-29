@@ -70,6 +70,12 @@ class JobController extends Controller
         // Overwrite $attributes['tags'] with the valid IDs
         $attributes['tags'] = $dbTagIds;
 
+        //Add the employer_id to the attributes
+        $attributes['employer_id'] = auth()->user()->employer->id;
+
+        //Create slug from title
+        $attributes['slug'] = str($attributes['title'])->slug();
+
         //Write the job to the database
         $job = Job::create($attributes);
 
@@ -77,7 +83,7 @@ class JobController extends Controller
         $job->tags()->attach($attributes['tags']);
 
         //Redirect
-        return redirect('/jobs');
+        return redirect('/');
     
     }
 }

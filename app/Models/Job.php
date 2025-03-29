@@ -63,5 +63,7 @@ class Job extends Model
         'description',
         'url',
         'featured',
+        'employer_id',
+        'slug',
     ];
 }
