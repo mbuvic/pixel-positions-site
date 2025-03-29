@@ -23,9 +23,13 @@ class JobController extends Controller
 
     public function create()
     {
+      if (auth()->user()->employer == null) {
+        return redirect('/user/company-profile');
+      } else {
         return view('jobs.create', [
-            'tags' => Tag::all()
-          ]);
+          'tags' => Tag::all()
+        ]);
+      }
     }
 
     public function store()

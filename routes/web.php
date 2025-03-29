@@ -21,5 +21,5 @@ Route::post('/user/logout', [UserController::class, 'logout'])->middleware('auth
 //User Profile Management
 Route::get('/user/profile', [ProfileController::class, 'showUser'])->middleware('auth');
 Route::post('/user/profile', [ProfileController::class, 'updateUser'])->middleware('auth');
-Route::get('/user/profile/company', [ProfileController::class, 'showUserCompany'])->middleware('auth');
-Route::post('/user/profile/company', [ProfileController::class, 'updateUserCompany'])->middleware('auth');
+Route::get('/user/company-profile', [ProfileController::class, 'showUserCompany'])->middleware('auth');
+Route::post('/user/company-profile', [ProfileController::class, 'updateUserCompany'])->middleware('auth');
