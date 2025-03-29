@@ -4,12 +4,6 @@
   @endphp
 @endforeach
 
-@php
-    // if (old('tags')) {
-    //     dd(old('tags'));
-    // }
-@endphp
-
 <x-layout>
   <x-slot:title>Pixel Positions - Add Job</x-slot:title>
   <h2 class="flex flex-col items-center font-bold text-xl mb-3">Add a new Job for {{ auth()->user()->employer->name }}</h2>
@@ -62,8 +56,10 @@
 
     <x-form-tag-select :jobTags="$jobTags" name="tags" :oldTags="old('tags')"/>
 
-    <div class="float-right">
-      <x-form-button type="submit">Save Job</x-form-button>
-    </div>    
-  </form>      
+    <div class="flex justify-end">
+      <x-form-button type="submit" class="flex flex-col items-center">
+        Save New Job
+      </x-form-button>
+    </div>
+  </form>
 </x-layout>
