@@ -12,7 +12,7 @@
 
 <x-layout>
   <x-slot:title>Pixel Positions - Add Job</x-slot:title>
-  <h2 class="flex flex-col items-center font-bold text-xl mb-3">Create a new Job</h2>
+  <h2 class="flex flex-col items-center font-bold text-xl mb-3">Add a new Job for {{ auth()->user()->employer->name }}</h2>
   <form class="max-w-4xl mx-auto" method="POST" action="/jobs/create">
     @csrf
 

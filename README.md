@@ -1,66 +1,164 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Job Board Platform - A Modern Laravel-based Job Posting and Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A robust job board platform built with Laravel that enables employers to post and manage job listings while providing job seekers with an intuitive interface to discover opportunities. The platform features user authentication, company profile management, and a tagging system for better job categorization.
 
-## About Laravel
+The application provides a streamlined experience for both employers and job seekers through a modern interface built with Tailwind CSS and Alpine.js. Employers can create detailed job postings with comprehensive information including salary, location, and schedule, while job seekers can easily browse and filter jobs based on various criteria.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Repository Structure
+```
+.
+├── app/                          # Application core code
+│   ├── Http/Controllers/        # Request handlers for jobs, users, and profiles
+│   ├── Models/                  # Eloquent models (User, Job, Employer, Tag)
+│   └── Policies/               # Authorization policies for jobs and employers
+├── database/                    # Database related files
+│   ├── factories/              # Model factories for testing and seeding
+│   ├── migrations/             # Database structure definitions
+│   └── seeders/               # Seed data for development
+├── resources/                  # Frontend assets and views
+│   ├── css/                   # Stylesheets including Tailwind CSS
+│   ├── js/                    # JavaScript files with Alpine.js
+│   └── views/                 # Blade templates for UI components
+├── routes/                    # Application routes definition
+│   └── web.php               # Web routes for job board functionality
+└── tests/                    # Application tests
+    └── Unit/                # Unit tests for models
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Usage Instructions
+### Prerequisites
+- PHP >= 8.2
+- Composer
+- Node.js and npm
+- MySQL or PostgreSQL database
+- Laravel CLI
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Installation
 
-## Learning Laravel
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd job-board
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. Install PHP dependencies:
+```bash
+composer install
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. Install JavaScript dependencies:
+```bash
+npm install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. Configure environment:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Laravel Sponsors
+5. Set up the database:
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Quick Start
 
-### Premium Partners
+1. Start the development server:
+```bash
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. Start the Vite development server:
+```bash
+npm run dev
+```
 
-## Contributing
+3. Access the application at `http://localhost:8000`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### More Detailed Examples
 
-## Code of Conduct
+1. Creating a job posting:
+```php
+// As an employer
+POST /jobs/create
+{
+    "title": "Senior Developer",
+    "description": "Looking for an experienced developer...",
+    "salary": "$120,000 - $150,000",
+    "location": "Remote",
+    "schedule": "full-time",
+    "tags": ["php", "laravel", "vue"]
+}
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Managing user profile:
+```php
+// Update user profile
+POST /user/profile
+{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com"
+}
+```
 
-## Security Vulnerabilities
+### Troubleshooting
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Database Connection Issues
+- Error: `SQLSTATE[HY000] [2002] Connection refused`
+  - Check database credentials in `.env`
+  - Ensure database service is running
+  - Verify database exists and is accessible
 
-## License
+2. Asset Compilation Issues
+- Error: `npm run dev` fails
+  - Clear node_modules and reinstall: `rm -rf node_modules && npm install`
+  - Check for Node.js version compatibility
+  - Verify Vite configuration in `vite.config.js`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Data Flow
+The application follows a standard MVC architecture with a focus on job posting and management.
+
+```ascii
+User/Employer -> Authentication -> Job Management
+     │                                │
+     └─────────> Profile ────────────>│
+                Management           Jobs
+                    │                 │
+                    v                 v
+                Database <─── Tags/Categories
+```
+
+Key component interactions:
+- User authentication flows through the UserController
+- Job creation and management handled by JobController
+- Profile updates managed by ProfileController
+- Employer-specific operations controlled by EmployerPolicy
+- Job data validated and stored with associated tags
+- File uploads handled for employer logos
+- Session management for user state
+- Cache implementation for performance optimization
+
+## Infrastructure
+
+![Infrastructure diagram](./docs/infra.svg)
+The application uses several key database tables:
+
+- `users`: Stores user authentication and profile data
+  - Primary user information including name and email
+  - Authentication credentials and verification status
+
+- `employers`: Company/employer profiles
+  - Links to user accounts
+  - Company details and logos
+
+- `jobs`: Job posting information
+  - Complete job details including title, description, salary
+  - Relationships to employers and tags
+  - Featured status tracking
+
+- `tags`: Job categorization system
+  - Tag names and relationships
+  - Many-to-many relationship with jobs
