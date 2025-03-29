@@ -20,16 +20,6 @@
             </a>
         </div>
     
-        <!-- Navigation Links (conditional) -->
-        @if (!request()->is('user/login') && !request()->is('user/register'))
-            <div class="hidden md:flex space-x-6 font-bold">
-                <a href="#" class="hover:text-blue-500 transition-colors">Jobs</a>
-                <a href="#" class="hover:text-blue-500 transition-colors">Careers</a>
-                <a href="#" class="hover:text-blue-500 transition-colors">Salaries</a>
-                <a href="#" class="hover:text-blue-500 transition-colors">Companies</a>
-            </div>
-        @endif
-    
         <!-- Right Section -->
         <div class="flex items-center gap-6">
             @if (!request()->is('jobs/create') && !request()->is('user/login') && !request()->is('user/register'))
@@ -49,7 +39,7 @@
                     @click="open = !open"
                     class="flex items-center gap-2 hover:text-blue-500 transition-colors"
                 >
-                    <span>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</span>
+                    <span>{{ auth()->user()->first_name }}</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>

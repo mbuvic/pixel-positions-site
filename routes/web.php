@@ -1,21 +1,25 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
-//dd(Auth::user());
 
 //Jobs
 Route::get('/', [JobController::class, 'index']);
 Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth');
 Route::post('/jobs/create', [JobController::class, 'store'])->middleware('auth');
 
-//Auth
-Route::get('/user/login', [UserController::class, 'index'])->name('login');;
-Route::get('/user/register', [UserController::class, 'create']);
-Route::post('/user/login', [UserController::class, 'setSession']);
-Route::post('/user/register', [UserController::class, 'store']);
-Route::post('/user/logout', [UserController::class, 'destroySession'])->middleware('auth');
+//User Authentication
+Route::get('/user/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/user/login', [UserController::class, 'login']);
+Route::get('/user/register', [UserController::class, 'showRegistrationForm']);
+Route::post('/user/register', [UserController::class, 'register']);
+Route::post('/user/logout', [UserController::class, 'logout'])->middleware('auth');
+
+//User Profile Management
+Route::get('/user/profile', [ProfileController::class, 'showUser'])->middleware('auth');
+Route::post('/user/profile', [ProfileController::class, 'updateUser'])->middleware('auth');
+Route::get('/user/profile/company', [ProfileController::class, 'showUserCompany'])->middleware('auth');
+Route::post('/user/profile/company', [ProfileController::class, 'updateUserCompany'])->middleware('auth');

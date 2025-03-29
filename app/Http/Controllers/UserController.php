@@ -9,43 +9,16 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function index()
+    public function showLoginForm()
     {
       if (!Auth::check()) {
-        return view('user.login');
+        return view('user.index');
       } else {
         return redirect('/');
       }
     }
 
-    public function create()
-    {
-      if (!Auth::check()) {
-        return view('user.register');
-      } else {
-        return redirect('/');
-      }
-    }
-
-    public function store()
-    {
-      //validate
-      $userAttributes = request()->validate([
-        'first_name' => ['required', 'min:3', 'max:255'],
-        'last_name' => ['required', 'min:3', 'max:255'],
-        'email' => ['required', 'email', 'max:255'],
-        'password' => ['required', 'min:3', 'max:255', 'confirmed']
-      ]);
-
-      //store
-      $user = User::create($userAttributes);
-      //create session
-      Auth::login($user);
-      //redirect
-      return redirect('/');
-    }
-
-    public function setSession()
+    public function login()
     {
       //validate
       $userAttributes = request()->validate([
@@ -63,7 +36,34 @@ class UserController extends Controller
       }
     }
 
-    public function destroySession()
+    public function showRegistrationForm()
+    {
+      if (!Auth::check()) {
+        return view('user.register');
+      } else {
+        return redirect('/');
+      }
+    }
+
+    public function register()
+    {
+      //validate
+      $userAttributes = request()->validate([
+        'first_name' => ['required', 'min:3', 'max:255'],
+        'last_name' => ['required', 'min:3', 'max:255'],
+        'email' => ['required', 'email', 'max:255'],
+        'password' => ['required', 'min:3', 'max:255', 'confirmed']
+      ]);
+
+      //store
+      $user = User::create($userAttributes);
+      //create session
+      Auth::login($user);
+      //redirect
+      return redirect('/');
+    }
+
+    public function logout()
     {
       Auth::logout();
       return redirect('/');
