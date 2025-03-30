@@ -17,30 +17,25 @@
       <nav class="flex justify-between items-center py-4 border-b border-white/10">
         <!-- Logo -->
         <div>
-          <a href="/user">
+          <a href="/user/dashboard">
             <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="Logo" class="h-10">
           </a>
         </div>
       
         <!-- Desktop Menu -->
         <div class="hidden md:flex space-x-6 font-bold">
-          <!-- Active Link Example -->
-          <a href="#" class="relative group active-link">
+          <x-user-menu-item href="/user/dashboard" :active="request()->is('user/dashboard')">
             Dashboard
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
-          </a>
-          <a href="#" class="relative group">
+          </x-user-menu-item>
+          <x-user-menu-item href="/user/my-jobs" :active="request()->is('user/my-jobs')">
             My Jobs
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
-          </a>
-          <a href="#" class="relative group">
+          </x-user-menu-item>
+          <x-user-menu-item href="/user/company-profile" :active="request()->is('user/company-profile')">
             Company Profile
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
-          </a>
-          <a href="#" class="relative group">
+          </x-user-menu-item>
+          <x-user-menu-item href="/user/profile" :active="request()->is('user/profile')">
             My Profile
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
-          </a>
+          </x-user-menu-item>
         </div>
       
         <!-- Right Section -->
@@ -63,22 +58,18 @@
       <!-- Mobile Menu (hidden by default) -->
       <div class="md:hidden" id="mobile-menu" style="display: none;">
         <div class="flex flex-col space-y-4 p-4 font-bold">
-          <a href="#" class="relative group active-link">
+          <x-user-menu-item href="/user/dashboard" :active="request()->is('user/dashboard')">
             Dashboard
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#" class="relative group">
+          </x-user-menu-item>
+          <x-user-menu-item href="/user/my-jobs" :active="request()->is('user/my-jobs')">
             My Jobs
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#" class="relative group">
+          </x-user-menu-item>
+          <x-user-menu-item href="/user/company-profile" :active="request()->is('user/company-profile')">
             Company Profile
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#" class="relative group">
+          </x-user-menu-item>
+          <x-user-menu-item href="/user/profile" :active="request()->is('user/profile')">
             My Profile
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
+          </x-user-menu-item>
         </div>
       </div>
       
