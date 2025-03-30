@@ -25,7 +25,7 @@
         <!-- Navigation Links (conditional) -->
         @if (!request()->is('user/login') && !request()->is('user/register'))
             <div class="hidden md:flex space-x-6 font-bold">
-                <a href="#" class="hover:text-blue-500 transition-colors">Jobs</a>
+                <a href="#" class="text-blue-500">Jobs</a>
                 <a href="#" class="hover:text-blue-500 transition-colors">Careers</a>
                 <a href="#" class="hover:text-blue-500 transition-colors">Salaries</a>
                 <a href="#" class="hover:text-blue-500 transition-colors">Companies</a>

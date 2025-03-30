@@ -17,7 +17,7 @@
       <nav class="flex justify-between items-center py-4 border-b border-white/10">
         <!-- Logo -->
         <div>
-          <a href="/">
+          <a href="/user">
             <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="Logo" class="h-10">
           </a>
         </div>
@@ -27,19 +27,19 @@
           <!-- Active Link Example -->
           <a href="#" class="relative group active-link">
             Dashboard
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
           </a>
           <a href="#" class="relative group">
             My Jobs
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
           </a>
           <a href="#" class="relative group">
             Company Profile
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
           </a>
           <a href="#" class="relative group">
             My Profile
-            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute left-0 -bottom-1 h-1 w-0 bg-gradient-to-r from-blue-500 to-gray-500 transition-all duration-600 group-hover:w-full"></span>
           </a>
         </div>
       
@@ -81,23 +81,6 @@
           </a>
         </div>
       </div>
-      
-      <script>
-        // Toggle mobile menu display
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-          var menu = document.getElementById('mobile-menu');
-          menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
-        });
-      </script>
-      
-      <!-- Optional Tailwind CSS Customization -->
-      <style>
-        /* If an anchor has the active-link class, show the underline by default */
-        .active-link > span {
-          width: 100%;
-        }
-      </style>
-      
       
       <main class="mt-10 max-w-[986px] mx-auto">
           {{ $slot }}
