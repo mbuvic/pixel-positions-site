@@ -59,7 +59,6 @@
           <x-auth-section />
         </div>
       </nav>
-<<<<<<< HEAD
       
       <!-- Mobile Menu (hidden by default) -->
       <div class="md:hidden" id="mobile-menu" style="display: none;">
@@ -100,8 +99,6 @@
       </style>
       
       
-=======
->>>>>>> e847cbd9e8f9fe096ee4923a02ccee2401d6b351
       <main class="mt-10 max-w-[986px] mx-auto">
           {{ $slot }}
       </main>
