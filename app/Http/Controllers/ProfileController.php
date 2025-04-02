@@ -13,6 +13,15 @@ class ProfileController extends Controller
     return view('user.dashboard');
   }
 
+  public function showMyJobs()
+  {
+    //employer has many jobs
+    $myJobs = auth()->user()->employer->jobs;
+    return view('user.my-jobs', [
+      'myJobs' => $myJobs
+    ]);
+  }
+
   public function showUser()
   {
     return view('user.profile');
