@@ -35,7 +35,7 @@
         <!-- Right Section -->
         <div class="flex items-center gap-6">
             @if (!request()->is('jobs/create') && !request()->is('user/login') && !request()->is('user/register'))
-                <a href="/jobs/create" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
+                <a href="/user/my-jobs/create" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
                     Post a Job
                 </a>
             @elseif(request()->is('jobs/create'))

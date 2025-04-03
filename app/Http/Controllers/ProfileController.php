@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employer;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -15,12 +17,19 @@ class ProfileController extends Controller
 
   public function showMyJobs()
   {
-    //employer has many jobs
-    $myJobs = auth()->user()->employer->jobs;
-    return view('user.my-jobs', [
-      'myJobs' => $myJobs
-    ]);
+      $user = auth()->user();
+  
+      if (!$user || !$user->employer) {
+        return view('user.company-profile');
+      }
+  
+      $myJobs = $user->employer->jobs;
+  
+      return view('user.my-jobs', [
+          'myJobs' => $myJobs
+      ]);
   }
+  
 
   public function showUser()
   {
@@ -97,5 +106,77 @@ class ProfileController extends Controller
     // Redirect back with a success message
     return redirect()->back()->with('success', 'Profile updated successfully!');
 
+  }
+
+  public function showJobCreateForm()
+  {
+    if (auth()->user()->employer == null) {
+      return redirect('/user/company-profile');
+    } else {
+      return view('user.create-job', [
+        'tags' => Tag::all()
+      ]);
+    }
+  }
+
+  public function storeJob()
+  {
+      $request = request();
+
+      // Convert comma separated tags string into an array
+      $request->merge([
+          'tags' => explode(',', $request->input('tags'))
+      ]);
+  
+      $attributes = $request->validate([
+          'title' => ['required', 'min:3', 'max:255'],
+          'location' => ['required', 'min:3', 'max:255'],
+          'salary' => ['required', 'min:3', 'max:255'],
+          // Restrict schedule to "full-time" or "part-time"
+          'schedule' => ['required', Rule::in(['full-time', 'part-time'])],
+          'description' => ['required', 'min:3'],
+          'url' => 'required|url',
+          // Validate that tags is an array with a minimum of 1 and maximum of 3 items
+          'tags' => 'required|array|min:3|max:4',
+      ]);
+
+      // Store the original tags from the request before you overwrite them
+      $originalTags = $attributes['tags'];
+
+      // Get the matching IDs from the database
+      $dbTagIds = Tag::whereIn('name', $originalTags)->pluck('id')->toArray();
+
+      // Check if we got fewer tags back from the DB than were provided
+      if (count($dbTagIds) !== count($originalTags)) {
+          return redirect()
+              ->back()
+              ->withErrors(['tags' => 'One or more tags are not valid'])
+              ->withInput();
+      }
+
+      // Overwrite $attributes['tags'] with the valid IDs
+      $attributes['tags'] = $dbTagIds;
+
+      //Add the employer_id to the attributes
+      $attributes['employer_id'] = auth()->user()->employer->id;
+
+      //Create slug from title
+      $attributes['slug'] = str($attributes['title'])->slug();
+      
+
+      //make sure slug is unique
+      $slugCount = Job::where('slug', $attributes['slug'])->count();
+      if ($slugCount > 0) {
+          $attributes['slug'] = $attributes['slug'] . '-' . $slugCount;
+      }
+
+      //Write the job to the database
+      $job = Job::create($attributes);
+
+      //Attach the tags
+      $job->tags()->attach($attributes['tags']);
+
+      //Redirect
+      return redirect()->back()->with('success', 'Job added successfully!');
   }
 }

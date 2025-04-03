@@ -51,7 +51,7 @@ class UserController extends Controller
       $userAttributes = request()->validate([
         'first_name' => ['required', 'min:3', 'max:255'],
         'last_name' => ['required', 'min:3', 'max:255'],
-        'email' => ['required', 'email', 'max:255'],
+        'email' => ['required', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'min:6', 'max:255', 'confirmed']
       ]);
 

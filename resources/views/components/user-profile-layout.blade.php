@@ -27,7 +27,7 @@
           <x-user-menu-item href="/user/dashboard" :active="request()->is('user/dashboard')">
             Dashboard
           </x-user-menu-item>
-          <x-user-menu-item href="/user/my-jobs" :active="request()->is('user/my-jobs')">
+          <x-user-menu-item href="/user/my-jobs" :active="request()->is('user/my-jobs')||request()->is('user/my-jobs/create')">
             My Jobs
           </x-user-menu-item>
           <x-user-menu-item href="/user/company-profile" :active="request()->is('user/company-profile')">

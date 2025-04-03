@@ -4,10 +4,20 @@
   @endphp
 @endforeach
 
-<x-layout>
+<x-user-profile-layout>
   <x-slot:title>Pixel Positions - Add Job</x-slot:title>
   <h2 class="flex flex-col items-center font-bold text-xl mb-3">Add a new Job for {{ auth()->user()->employer->name }}</h2>
-  <form class="max-w-4xl mx-auto" method="POST" action="/jobs/create">
+
+  @if(session('success'))
+    <div x-data="{ show: true }" x-show="show" class="max-w-4xl mx-auto mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded relative">
+      <span>{{ session('success') }}</span>
+      <button @click="show = false" class="absolute top-0 right-0 mt-2 mr-2 text-green-700 hover:text-green-900 focus:outline-none">
+        &times;
+      </button>
+    </div>
+  @endif
+
+  <form class="max-w-4xl mx-auto" method="POST" action="/user/my-jobs/create">
     @csrf
 
     <x-form-field-group>
@@ -62,4 +72,4 @@
       </x-form-button>
     </div>
   </form>
-</x-layout>
+</x-user-profile-layout>

@@ -1,5 +1,6 @@
 @php
     $employer = auth()->user()->employer;
+
 @endphp
 
 <x-user-profile-layout>
@@ -28,36 +29,43 @@
   <!-- Create a nice looking tailwind table -->
   <div class="container mx-auto px-4">
     <div class="overflow-x-auto">
-        <table class="min-w-full bg-gray-800 border border-gray-700 shadow-md rounded-lg">
-        <thead class="bg-gray-900 text-gray-200">
-            <tr>
-            <th class="px-6 py-3 text-left">Job Title</th>
-            <th class="px-6 py-3 text-left">Description</th>
-            <th class="px-6 py-3 text-left">Location</th>
-            <th class="px-6 py-3 text-left">Action</th>
-            </tr>
-        </thead>
-        <tbody class="text-gray-300">
-            @forelse($myJobs as $job)
-            <tr class="border-b border-gray-700 hover:bg-gray-700">
-                <td class="px-6 py-4">{{ $job->title }}</td>
-                <td class="px-6 py-4">{{ $job->description }}</td>
-                <td class="px-6 py-4">{{ $job->location }}</td>
-                <td class="px-6 py-4 space-x-2">
-                <a href="/jobs/{{ $job->id }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-500 transition-colors">
-                    <i class="fas fa-eye mr-1"></i> View
-                </a>
-                <a href="/jobs/{{ $job->id }}/edit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-500 transition-colors">
-                    <i class="fas fa-edit mr-1"></i> Edit
-                </a>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td class="px-6 py-4 text-center" colspan="4">No jobs found.</td>
-            </tr>
-            @endforelse
-        </tbody>
+      <div>
+      <a href="/user/my-jobs/create"
+        class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors flex items-center w-fit ml-auto">
+        <i class="fa-solid fa-add"></i>
+        <span class="hidden sm:inline ml-2">Add Job</span>
+      </a>
+      </div>
+        <table class="min-w-full bg-gray-800 border border-gray-700 shadow-md rounded-lg mt-5">
+          <thead class="bg-gray-900 text-gray-200">
+              <tr>
+              <th class="px-6 py-3 text-left">Job Title</th>
+              <th class="px-6 py-3 text-left">Description</th>
+              <th class="px-6 py-3 text-left">Location</th>
+              <th class="px-6 py-3 text-left">Action</th>
+              </tr>
+          </thead>
+          <tbody class="text-gray-300">
+              @forelse($myJobs as $job)
+              <tr class="border-b border-gray-700 hover:bg-gray-700">
+                  <td class="px-6 py-4">{{ $job->title }}</td>
+                  <td class="px-6 py-4">{{ $job->description }}</td>
+                  <td class="px-6 py-4">{{ $job->location }}</td>
+                  <td class="px-6 py-4 space-x-2">
+                  <a href="/jobs/{{ $job->id }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-500 transition-colors">
+                      <i class="fas fa-eye mr-1"></i> View
+                  </a>
+                  <a href="/jobs/{{ $job->id }}/edit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-500 transition-colors">
+                      <i class="fas fa-edit mr-1"></i> Edit
+                  </a>
+                  </td>
+              </tr>
+              @empty
+              <tr>
+                  <td class="px-6 py-4 text-center" colspan="4">No jobs found.</td>
+              </tr>
+              @endforelse
+          </tbody>
         </table>
     </div>
     </div>

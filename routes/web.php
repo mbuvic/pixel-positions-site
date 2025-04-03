@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 //Jobs
 Route::get('/', [JobController::class, 'index']);
-Route::get('/jobs/create', [JobController::class, 'create'])->middleware('auth');
-Route::post('/jobs/create', [JobController::class, 'store'])->middleware('auth');
 
 //User Authentication
 Route::get('/user/login', [UserController::class, 'showLoginForm'])->name('login');
@@ -25,3 +23,5 @@ Route::get('/user/profile', [ProfileController::class, 'showUser'])->middleware(
 Route::post('/user/profile', [ProfileController::class, 'updateUser'])->middleware('auth');
 Route::get('/user/company-profile', [ProfileController::class, 'showUserCompany'])->middleware('auth');
 Route::post('/user/company-profile', [ProfileController::class, 'updateUserCompany'])->middleware('auth');
+Route::get('/user/my-jobs/create', [ProfileController::class, 'showJobCreateForm'])->middleware('auth');
+Route::post('/user/my-jobs/create', [ProfileController::class, 'storeJob'])->middleware('auth');
