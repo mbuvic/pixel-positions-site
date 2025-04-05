@@ -19,4 +19,17 @@ class JobController extends Controller
             'tags' => Tag::all(),
         ]);
     }
+
+    public function viewJob($slug)
+    {
+        //fetch job by slug
+        $job = Job::where('slug', $slug)->firstOrFail();
+        //fetch tags attached to that job
+        $tags = $job->tags;
+        //dd($tags);
+        return view('jobs.view', [
+            'job' => $job,
+            'tags' => $tags,
+        ]);
+    }
 }

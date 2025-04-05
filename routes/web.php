@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 //Jobs
 Route::get('/', [JobController::class, 'index']);
+Route::get('/jobs/{slug}', [JobController::class, 'viewJob']);
 
 //User Authentication
 Route::get('/user/login', [UserController::class, 'showLoginForm'])->name('login');
