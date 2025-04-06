@@ -20,7 +20,8 @@ Route::post('/user/logout', [UserController::class, 'logout'])->middleware('auth
 //User Profile Management
 Route::get('/user/dashboard', [ProfileController::class, 'showDashboard'])->middleware('auth');
 Route::get('/user/my-jobs', [ProfileController::class, 'showMyJobs'])->middleware('auth');
-Route::get('/user/my-jobs/edit/{$slug}', [ProfileController::class, 'editAJob'])->middleware('auth');
+Route::get('/user/my-jobs/edit/{slug}', [ProfileController::class, 'editAJob'])->middleware('auth');
+Route::post('/user/my-jobs/edit', [ProfileController::class, 'updateAJob'])->middleware('auth');
 Route::get('/user/profile', [ProfileController::class, 'showUser'])->middleware('auth');
 Route::post('/user/profile', [ProfileController::class, 'updateUser'])->middleware('auth');
 Route::get('/user/company-profile', [ProfileController::class, 'showUserCompany'])->middleware('auth');

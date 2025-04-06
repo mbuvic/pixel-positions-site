@@ -52,7 +52,7 @@
                   <td class="px-6 py-4">{{ $job->salary }}</td>
                   <td class="px-6 py-4">{{ $job->location }}</td>
                   <td class="px-6 py-4 space-x-2">
-                  <a href="/jobs/{{ $job->id }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-500 transition-colors">
+                  <a href="/user/my-jobs/edit/{{ $job->slug }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-500 transition-colors">
                       <i class="fas fa-eye mr-1"></i> View
                   </a>
                   <a href="/jobs/{{ $job->id }}/edit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-green-600 rounded hover:bg-green-500 transition-colors">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employer;
+use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -17,11 +18,13 @@ class ProfileController extends Controller
 
   public function editAJob($slug)
   {
-    $job = Employer::where('slug', $slug)->first();
-    $tags = $job->tags;
+    $job = Job::where('slug', $slug)->firstOrFail();
+    $job_tags = $job->tags;
+
     return view('user.edit-job', [
         'job' => $job,
-        'tags' => $tags,
+        'job_tags' => $job_tags,
+        'all_tags' => Tag::all()
     ]);
 
   }
