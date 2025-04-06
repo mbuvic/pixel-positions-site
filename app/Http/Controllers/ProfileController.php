@@ -15,6 +15,17 @@ class ProfileController extends Controller
     return view('user.dashboard');
   }
 
+  public function editAJob($slug)
+  {
+    $job = Employer::where('slug', $slug)->first();
+    $tags = $job->tags;
+    return view('user.edit-job', [
+        'job' => $job,
+        'tags' => $tags,
+    ]);
+
+  }
+
   public function showMyJobs()
   {
       $user = auth()->user();

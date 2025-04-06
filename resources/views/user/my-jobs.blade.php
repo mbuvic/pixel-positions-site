@@ -40,7 +40,7 @@
           <thead class="bg-gray-900 text-gray-200">
               <tr>
               <th class="px-6 py-3 text-left">Job Title</th>
-              <th class="px-6 py-3 text-left">Description</th>
+              <th class="px-6 py-3 text-left">Salary</th>
               <th class="px-6 py-3 text-left">Location</th>
               <th class="px-6 py-3 text-left">Action</th>
               </tr>
@@ -49,7 +49,7 @@
               @forelse($myJobs as $job)
               <tr class="border-b border-gray-700 hover:bg-gray-700">
                   <td class="px-6 py-4">{{ $job->title }}</td>
-                  <td class="px-6 py-4">{{ $job->description }}</td>
+                  <td class="px-6 py-4">{{ $job->salary }}</td>
                   <td class="px-6 py-4">{{ $job->location }}</td>
                   <td class="px-6 py-4 space-x-2">
                   <a href="/jobs/{{ $job->id }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-500 transition-colors">

@@ -26,7 +26,6 @@ class JobController extends Controller
         $job = Job::where('slug', $slug)->firstOrFail();
         //fetch tags attached to that job
         $tags = $job->tags;
-        //dd($tags);
         return view('jobs.view', [
             'job' => $job,
             'tags' => $tags,
