@@ -22,6 +22,7 @@ Route::get('/user/dashboard', [ProfileController::class, 'showDashboard'])->midd
 Route::get('/user/my-jobs', [ProfileController::class, 'showMyJobs'])->middleware('auth');
 Route::get('/user/my-jobs/edit/{slug}', [ProfileController::class, 'editAJob'])->middleware('auth');
 Route::post('/user/my-jobs/edit', [ProfileController::class, 'updateAJob'])->middleware('auth');
+Route::delete('user/my-jobs/delete/{jobId}', [ProfileController::class, 'deleteAJob'])->middleware('auth');
 Route::get('/user/profile', [ProfileController::class, 'showUser'])->middleware('auth');
 Route::post('/user/profile', [ProfileController::class, 'updateUser'])->middleware('auth');
 Route::get('/user/company-profile', [ProfileController::class, 'showUserCompany'])->middleware('auth');

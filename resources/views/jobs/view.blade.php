@@ -12,7 +12,7 @@
 
         <section>
             <x-section-heading>Job Details</x-section-heading>
-            <p>{{ $job->description ?? 'No Description' }}</p>
+            <p>{!! $job->description ?? 'No Description' !!}</p>
         </section>
 
         <section>

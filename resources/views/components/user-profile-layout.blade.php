@@ -11,6 +11,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     @vite(['resources/js/app.js'])
+    <!-- Place the first <script> tag in your HTML's <head> -->
+    <script src="https://cdn.tiny.cloud/1/qmmis7tn5zok0lxly2y8lj4et2i6shtdqoa081ucr77fnlqm/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        skin: 'oxide-dark',            // Use the dark skin for the editor UI
+        content_css: 'dark',           // Use the dark theme for the content area
+        plugins: [
+          'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+          'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+        ],
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+          { value: 'First.Name', title: 'First Name' },
+          { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+      });
+    </script>
+
 </head>
 <body class="bg-gray-900 text-white">
     <div class="px-10">
@@ -27,7 +50,7 @@
           <x-user-menu-item href="/user/dashboard" :active="request()->is('user/dashboard')">
             Dashboard
           </x-user-menu-item>
-          <x-user-menu-item href="/user/my-jobs" :active="request()->is('user/my-jobs')||request()->is('user/my-jobs/create')">
+          <x-user-menu-item href="/user/my-jobs" :active="request()->is('user/my-jobs*')">
             My Jobs
           </x-user-menu-item>
           <x-user-menu-item href="/user/company-profile" :active="request()->is('user/company-profile')">

@@ -86,6 +86,14 @@ class ProfileController extends Controller
     return redirect()->back()->with('success', 'Job updated successfully!');
   }
 
+  public function deleteAJob($jobId)
+  {
+    $job = Job::where('id', $jobId)->firstOrFail();
+    $job->delete();
+
+    return redirect('/user/my-jobs')->with('success', 'Job deleted successfully!');
+  } 
+
   public function showMyJobs()
   {
       $user = auth()->user();

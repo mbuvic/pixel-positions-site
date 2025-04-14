@@ -82,7 +82,7 @@ foreach($job_tags as $tag) {
       </x-form-button>
     </div>
   </form>
-    <form method="POST" action="/jobs/{{ $job->id }}" id="delete-form" class="hidden">
+    <form method="POST" action="/user/my-jobs/delete/{{ $job->id }}" id="delete-form" class="hidden">
         @csrf
         @method('DELETE')
     </form>
