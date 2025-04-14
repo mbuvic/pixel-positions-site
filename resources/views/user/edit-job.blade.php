@@ -24,6 +24,8 @@ foreach($job_tags as $tag) {
   <form class="max-w-4xl mx-auto" id="edit-job" method="POST" action="/user/my-jobs/edit">
     @csrf
 
+    <input type="hidden" name="job_id" value="{{ $job->id }}">
+
     <x-form-field-group>
 
       <x-form-field>

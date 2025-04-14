@@ -29,6 +29,63 @@ class ProfileController extends Controller
 
   }
 
+  public function updateAJob()
+  {
+    //validate incoming request data
+    $request = request();
+
+    // Convert comma separated tags string into an array
+    $request->merge([
+        'tags' => explode(',', $request->input('tags'))
+    ]);
+
+    $attributes = $request->validate([
+        'job_id' => 'required|integer',
+        'title' => ['required', 'min:3', 'max:255'],
+        'location' => ['required', 'min:3', 'max:255'],
+        'salary' => ['required', 'min:3', 'max:255'],
+        // Restrict schedule to "full-time" or "part-time"
+        'schedule' => ['required', Rule::in(['full-time', 'part-time'])],
+        'description' => ['required', 'min:3'],
+        'url' => 'required|url',
+        // Validate that tags is an array with a minimum of 1 and maximum of 3 items
+        'tags' => 'required|array|min:3|max:4',
+    ]);
+
+    // Store the original tags from the request before you overwrite them
+    $originalTags = $attributes['tags'];
+
+    // Get the matching IDs from the database
+    $dbTagIds = Tag::whereIn('name', $originalTags)->pluck('id')->toArray();
+
+    // Check if we got fewer tags back from the DB than were provided
+    if (count($dbTagIds) !== count($originalTags)) {
+        return redirect()
+            ->back()
+            ->withErrors(['tags' => 'One or more tags are not valid'])
+            ->withInput();
+    }
+
+    // Overwrite $attributes['tags'] with the valid IDs
+    $attributes['tags'] = $dbTagIds;
+
+    //Create slug from title
+    $attributes['slug'] = str($attributes['title'])->slug();
+
+
+    //make sure slug is unique select where slug = attributes['slug'] and id != request()->input('job_id')
+    $slugCount = Job::where('slug', $attributes['slug'])->where('id', '!=', request()->input('job_id'))->count();
+    if ($slugCount > 0) {
+        $attributes['slug'] = $attributes['slug'] . '-' . $slugCount;
+    }
+
+    //Update the job in the database
+    $job = Job::where('id', request()->input('job_id'))->firstOrFail();
+    $job->update($attributes);
+
+    return redirect()->back()->with('success', 'Job updated successfully!');
+  }
+
   public function showMyJobs()
   {
       $user = auth()->user();
@@ -44,7 +101,6 @@ class ProfileController extends Controller
       ]);
   }
   
-
   public function showUser()
   {
     return view('user.profile');
